@@ -1,11 +1,11 @@
 <script setup lang="ts">
 defineProps<{
-  dark: boolean;
-}>();
+  dark: boolean
+}>()
 
 defineEmits<{
-  "toggle-dark": [];
-}>();
+  toggleDark: []
+}>()
 </script>
 
 <template>
@@ -27,10 +27,10 @@ defineEmits<{
         <input
           type="checkbox"
           :checked="dark"
-          @change="$emit('toggle-dark')"
           aria-label="Toggle dark mode"
-        />
-        <span class="dark-toggle-track"></span>
+          @change="$emit('toggleDark')"
+        >
+        <span class="dark-toggle-track" />
         <span class="dark-toggle-icon sun">☀</span>
         <span class="dark-toggle-icon moon">☾</span>
       </label>

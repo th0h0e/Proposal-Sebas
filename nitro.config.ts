@@ -1,19 +1,19 @@
-import { defineConfig } from "nitro";
+import { defineConfig } from 'nitro'
 
 export default defineConfig({
-  serverDir: "./server",
+  serverDir: './server',
 
   storage: {
     org: {
-      driver: "fs",
-      base: "./.data/org",
+      driver: 'fs',
+      base: './.data/org',
     },
   },
 
   devStorage: {
     org: {
-      driver: "fs",
-      base: "./.data/org",
+      driver: 'fs',
+      base: './.data/org',
     },
   },
 
@@ -21,5 +21,5 @@ export default defineConfig({
     port: 3001,
   },
 
-  compatibilityDate: "2026-03-27",
-});
+  compatibilityDate: '2026-03-27',
+})
