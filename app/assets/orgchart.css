@@ -1,0 +1,722 @@
+/* ── SUPERKIDS ORG CHART STYLES ── */
+
+:root {
+  /* ── Light Mode (default) ── */
+  --bg: #f5f2eb;
+  --surface: #ffffff;
+  --border: #d6d0c4;
+  --text: #1a1714;
+  --text-muted: #7a7469;
+  --ink: #1a1714;
+  --shadow: rgba(26, 23, 20, 0.5);
+
+  --yellow: #f5c842;
+  --yellow-soft: rgba(245, 200, 66, 0.15);
+  --yellow-label: #a07800;
+  --red: #e8432d;
+  --red-soft: rgba(232, 67, 45, 0.1);
+  --blue: #2d5be8;
+  --blue-soft: rgba(45, 91, 232, 0.1);
+  --green: #2db87a;
+  --green-soft: rgba(45, 184, 122, 0.1);
+  --purple: #8b2de8;
+  --purple-soft: rgba(139, 45, 232, 0.1);
+
+  --header-bg: var(--yellow);
+  --modal-overlay: rgba(26, 23, 20, 0.6);
+
+  font-family: 'Space Grotesk', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+/* ── Dark Mode ── */
+body.dark {
+  --bg: #141210;
+  --surface: #1f1d1a;
+  --border: #3a3632;
+  --text: #e8e4dc;
+  --text-muted: #9a948a;
+  --ink: #e8e4dc;
+  --shadow: rgba(0, 0, 0, 0.7);
+
+  --yellow: #f5c842;
+  --yellow-soft: rgba(245, 200, 66, 0.12);
+  --yellow-label: #f5c842;
+  --red: #f06a58;
+  --red-soft: rgba(240, 106, 88, 0.1);
+  --blue: #6b8df5;
+  --blue-soft: rgba(107, 141, 245, 0.1);
+  --green: #4dd89a;
+  --green-soft: rgba(77, 216, 154, 0.1);
+  --purple: #a855f7;
+  --purple-soft: rgba(168, 85, 247, 0.1);
+
+  --header-bg: #2a2520;
+  --modal-overlay: rgba(0, 0, 0, 0.75);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: auto;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ── HEADER ── */
+.org-header {
+  padding: 28px 40px 20px;
+  border-bottom: 2px solid var(--ink);
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  background: var(--header-bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.org-header h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px;
+  letter-spacing: 2px;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.org-header .founders {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  opacity: 0.65;
+  padding-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.org-header .tagline {
+  margin-left: auto;
+  font-size: 11px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink);
+  opacity: 0.7;
+  max-width: 240px;
+  text-align: right;
+  padding-bottom: 4px;
+  line-height: 1.5;
+}
+
+/* ── PRINCIPALS SECTION ── */
+.principals {
+  padding: 40px 40px 32px;
+  border-bottom: 2px solid var(--ink);
+  background: var(--surface);
+}
+
+.principals-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.principals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  max-width: 1400px;
+}
+
+.principal-card {
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  padding: 20px 22px;
+  background: var(--bg);
+  cursor: pointer;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+  position: relative;
+}
+
+.principal-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.principal-card .role-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.principal-card .p-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 1px;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.principal-card .p-title {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.principal-card .p-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 10px;
+  font-style: italic;
+  line-height: 1.5;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+}
+
+.principal-card.founder-a {
+  border-color: var(--red);
+}
+.principal-card.founder-a:hover {
+  box-shadow: 4px 4px 0 var(--red);
+}
+.principal-card.founder-b {
+  border-color: var(--blue);
+}
+.principal-card.founder-b:hover {
+  box-shadow: 4px 4px 0 var(--blue);
+}
+.principal-card.core {
+  border-color: var(--ink);
+}
+
+/* ── ORG BOARD ── */
+.board-wrap {
+  padding: 32px 24px 60px;
+  min-width: 1100px;
+}
+
+.board-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  padding: 0 16px 20px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(240px, 1fr));
+  gap: 0;
+  position: relative;
+}
+
+.col-divider {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--ink) 8%, var(--ink) 92%, transparent);
+  pointer-events: none;
+}
+
+.divider-label {
+  position: absolute;
+  left: 50%;
+  top: -22px;
+  transform: translateX(-50%);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--bg);
+  padding: 0 10px;
+  white-space: nowrap;
+}
+
+/* Column */
+.col {
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.col-header {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-align: center;
+  padding-bottom: 16px;
+}
+
+.col-creative .col-header {
+  color: var(--red);
+}
+.col-network .col-header {
+  color: var(--green);
+}
+.col-comms .col-header {
+  color: var(--blue);
+}
+.col-ops .col-header {
+  color: var(--purple);
+}
+
+/* Section box */
+.section-box {
+  border: 1.5px dashed;
+  border-radius: 8px;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section-box.red {
+  border-color: var(--red);
+  background: var(--red-soft);
+}
+.section-box.green {
+  border-color: var(--green);
+  background: var(--green-soft);
+}
+.section-box.blue {
+  border-color: var(--blue);
+  background: var(--blue-soft);
+}
+.section-box.purple {
+  border-color: var(--purple);
+  background: var(--purple-soft);
+}
+.section-box.yellow {
+  border-color: var(--yellow);
+  background: var(--yellow-soft);
+}
+
+.section-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 2px;
+}
+
+.section-box.red .section-label {
+  color: var(--red);
+}
+.section-box.green .section-label {
+  color: var(--green);
+}
+.section-box.blue .section-label {
+  color: var(--blue);
+}
+.section-box.purple .section-label {
+  color: var(--purple);
+}
+.section-box.yellow .section-label {
+  color: var(--yellow-label);
+}
+
+.section-sublabel {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-align: center;
+  font-style: italic;
+  margin-top: -4px;
+  margin-bottom: 2px;
+}
+
+/* Person card */
+.card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition:
+    transform 0.12s,
+    box-shadow 0.12s;
+  position: relative;
+}
+
+.card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.card.red {
+  border-left: 3px solid var(--red);
+}
+.card.green {
+  border-left: 3px solid var(--green);
+}
+.card.blue {
+  border-left: 3px solid var(--blue);
+}
+.card.purple {
+  border-left: 3px solid var(--purple);
+}
+.card.yellow {
+  border-left: 3px solid var(--yellow);
+}
+
+.card-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.card-role {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.tag {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 2px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.tag-red {
+  background: var(--red-soft);
+  color: var(--red);
+  border: 1px solid var(--red);
+}
+.tag-blue {
+  background: var(--blue-soft);
+  color: var(--blue);
+  border: 1px solid var(--blue);
+}
+.tag-green {
+  background: var(--green-soft);
+  color: var(--green);
+  border: 1px solid var(--green);
+}
+.tag-yellow {
+  background: var(--yellow-soft);
+  color: var(--yellow-label);
+  border: 1px solid var(--yellow);
+}
+.tag-purple {
+  background: var(--purple-soft);
+  color: var(--purple);
+  border: 1px solid var(--purple);
+}
+
+.status-badge {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--yellow-soft);
+  color: var(--yellow-label);
+  border: 1px solid var(--yellow);
+  margin-top: 5px;
+  display: inline-block;
+}
+
+/* ── EDIT MODAL ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--modal-overlay);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal {
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  padding: 28px;
+  width: 420px;
+  max-width: 95vw;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.modal h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.modal label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 14px;
+}
+
+.modal input,
+.modal select,
+.modal textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 4px;
+  padding: 9px 12px;
+  color: var(--ink);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.modal textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+.modal input:focus,
+.modal select:focus,
+.modal textarea:focus {
+  border-color: var(--ink);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+  justify-content: flex-end;
+}
+
+.btn {
+  padding: 9px 22px;
+  border-radius: 4px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1.5px solid var(--ink);
+  transition:
+    transform 0.1s,
+    box-shadow 0.1s;
+}
+
+.btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.btn-cancel {
+  background: var(--bg);
+  color: var(--text-muted);
+}
+.btn-save {
+  background: var(--yellow);
+  color: var(--ink);
+}
+.btn-danger {
+  background: var(--red-soft);
+  color: var(--red);
+  border-color: var(--red);
+}
+.btn-danger:hover {
+  box-shadow: 2px 2px 0 var(--red);
+}
+
+/* Loading state */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  font-size: 14px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ── DARK MODE TOGGLE SWITCH ── */
+.dark-toggle-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  padding-bottom: 4px;
+  flex-shrink: 0;
+}
+
+.dark-toggle-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ink);
+  opacity: 0.6;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.dark-toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.dark-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.dark-toggle-track {
+  position: absolute;
+  inset: 0;
+  background: var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.25s;
+  border: 1.5px solid var(--ink);
+}
+
+.dark-toggle-track::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: var(--yellow);
+  border-radius: 50%;
+  transition:
+    transform 0.25s,
+    background 0.25s;
+  border: 1px solid var(--ink);
+}
+
+.dark-toggle input:checked + .dark-toggle-track {
+  background: var(--ink);
+}
+
+.dark-toggle input:checked + .dark-toggle-track::after {
+  transform: translateX(20px);
+  background: var(--purple);
+}
+
+.dark-toggle input:focus-visible + .dark-toggle-track {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* Sun / Moon icons inside toggle */
+.dark-toggle-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  line-height: 1;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+.dark-toggle-icon.sun {
+  left: 5px;
+  opacity: 1;
+}
+.dark-toggle-icon.moon {
+  right: 5px;
+  opacity: 0.4;
+}
+.dark-toggle input:checked ~ .dark-toggle-icon.sun {
+  opacity: 0.4;
+}
+.dark-toggle input:checked ~ .dark-toggle-icon.moon {
+  opacity: 1;
+}
+
+/* ── Dark-mode specific refinements ── */
+body.dark .org-header {
+  border-bottom-color: #3a3632;
+}
+
+body.dark .principals {
+  border-bottom-color: #3a3632;
+}
+
+body.dark .principal-card {
+  background: var(--surface);
+}
+body.dark .principal-card:hover {
+  box-shadow: 4px 4px 0 var(--shadow);
+}
+
+body.dark .card {
+  background: var(--surface);
+}
+body.dark .card:hover {
+  box-shadow: 3px 3px 0 var(--shadow);
+}
+
+body.dark .modal {
+  box-shadow: 6px 6px 0 var(--shadow);
+  border-color: #3a3632;
+}
+
+body.dark .col-divider {
+  background: linear-gradient(to bottom, transparent, #3a3632 8%, #3a3632 92%, transparent);
+}
+
+body.dark .divider-label {
+  background: var(--bg);
+}
+
+body.dark .btn:hover {
+  box-shadow: 2px 2px 0 var(--shadow);
+}
+
+body.dark .btn-save {
+  color: #1a1714;
+}
+
+body.dark .principal-card.founder-a:hover {
+  box-shadow: 4px 4px 0 var(--red);
+}
+body.dark .principal-card.founder-b:hover {
+  box-shadow: 4px 4px 0 var(--blue);
+}

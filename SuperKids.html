@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUPERKIDS AGENCY</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f2eb;
+    --surface: #ffffff;
+    --border: #d6d0c4;
+    --text: #1a1714;
+    --text-muted: #7a7469;
+    --ink: #1a1714;
+
+    --yellow: #f5c842;
+    --yellow-soft: rgba(245,200,66,0.15);
+    --red: #e8432d;
+    --red-soft: rgba(232,67,45,0.1);
+    --blue: #2d5be8;
+    --blue-soft: rgba(45,91,232,0.1);
+    --green: #2db87a;
+    --green-soft: rgba(45,184,122,0.1);
+    --purple: #8b2de8;
+    --purple-soft: rgba(139,45,232,0.1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: auto;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 28px 40px 20px;
+    border-bottom: 2px solid var(--ink);
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    background: var(--yellow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    letter-spacing: 2px;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  header .founders {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    opacity: 0.65;
+    padding-bottom: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  header .tagline {
+    margin-left: auto;
+    font-size: 11px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink);
+    opacity: 0.7;
+    max-width: 240px;
+    text-align: right;
+    padding-bottom: 4px;
+    line-height: 1.5;
+  }
+
+  /* ── PRINCIPALS SECTION ── */
+  .principals {
+    padding: 40px 40px 32px;
+    border-bottom: 2px solid var(--ink);
+    background: var(--surface);
+  }
+
+  .principals-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .principals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    max-width: 1400px;
+  }
+
+  .principal-card {
+    border: 2px solid var(--ink);
+    border-radius: 4px;
+    padding: 20px 22px;
+    background: var(--bg);
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative;
+  }
+
+  .principal-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+
+  .principal-card .role-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .principal-card .p-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 1px;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .principal-card .p-title {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  .principal-card .p-note {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 10px;
+    font-style: italic;
+    line-height: 1.5;
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+  }
+
+  .principal-card.founder-a { border-color: var(--red); }
+  .principal-card.founder-a:hover { box-shadow: 4px 4px 0 var(--red); }
+  .principal-card.founder-b { border-color: var(--blue); }
+  .principal-card.founder-b:hover { box-shadow: 4px 4px 0 var(--blue); }
+  .principal-card.core { border-color: var(--ink); }
+
+  /* ── ORG BOARD ── */
+  .board-wrap {
+    padding: 32px 24px 60px;
+    min-width: 1100px;
+  }
+
+  .board-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    padding: 0 16px 20px;
+  }
+
+  .board {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(240px, 1fr));
+    gap: 0;
+    position: relative;
+  }
+
+  .col-divider {
+    position: absolute;
+    left: 50%;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, var(--ink) 8%, var(--ink) 92%, transparent);
+    pointer-events: none;
+  }
+
+  .divider-label {
+    position: absolute;
+    left: 50%;
+    top: -22px;
+    transform: translateX(-50%);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--bg);
+    padding: 0 10px;
+    white-space: nowrap;
+  }
+
+  /* Column */
+  .col {
+    padding: 0 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .col-header {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-align: center;
+    padding-bottom: 16px;
+  }
+
+  .col-creative .col-header { color: var(--red); }
+  .col-network .col-header  { color: var(--green); }
+  .col-comms .col-header    { color: var(--blue); }
+  .col-ops .col-header      { color: var(--purple); }
+
+  /* Section box */
+  .section-box {
+    border: 1.5px dashed;
+    border-radius: 8px;
+    padding: 14px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .section-box.red    { border-color: var(--red);    background: var(--red-soft); }
+  .section-box.green  { border-color: var(--green);  background: var(--green-soft); }
+  .section-box.blue   { border-color: var(--blue);   background: var(--blue-soft); }
+  .section-box.purple { border-color: var(--purple); background: var(--purple-soft); }
+  .section-box.yellow { border-color: var(--yellow); background: var(--yellow-soft); }
+
+  .section-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 2px;
+  }
+
+  .section-box.red    .section-label { color: var(--red); }
+  .section-box.green  .section-label { color: var(--green); }
+  .section-box.blue   .section-label { color: var(--blue); }
+  .section-box.purple .section-label { color: var(--purple); }
+  .section-box.yellow .section-label { color: #a07800; }
+
+  .section-sublabel {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-align: center;
+    font-style: italic;
+    margin-top: -4px;
+    margin-bottom: 2px;
+  }
+
+  /* Person card */
+  .card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: transform 0.12s, box-shadow 0.12s;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+
+  .card.red    { border-left: 3px solid var(--red); }
+  .card.green  { border-left: 3px solid var(--green); }
+  .card.blue   { border-left: 3px solid var(--blue); }
+  .card.purple { border-left: 3px solid var(--purple); }
+  .card.yellow { border-left: 3px solid var(--yellow); }
+
+  .card-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .card-role {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+    font-weight: 500;
+  }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+
+  .tag {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 2px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .tag-red    { background: var(--red-soft);    color: var(--red);    border: 1px solid var(--red); }
+  .tag-blue   { background: var(--blue-soft);   color: var(--blue);   border: 1px solid var(--blue); }
+  .tag-green  { background: var(--green-soft);  color: var(--green);  border: 1px solid var(--green); }
+  .tag-yellow { background: var(--yellow-soft); color: #a07800;       border: 1px solid var(--yellow); }
+  .tag-purple { background: var(--purple-soft); color: var(--purple); border: 1px solid var(--purple); }
+
+  .status-badge {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--yellow-soft);
+    color: #a07800;
+    border: 1px solid var(--yellow);
+    margin-top: 5px;
+    display: inline-block;
+  }
+
+  /* VP / Founders row */
+  .vp-row {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 0 12px;
+    margin-top: 24px;
+  }
+
+  .vp-card {
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+    padding: 14px 18px;
+    background: var(--surface);
+    cursor: pointer;
+    transition: transform 0.12s, box-shadow 0.12s;
+    text-align: center;
+  }
+
+  .vp-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+
+  .vp-card .card-name { font-size: 15px; font-weight: 700; }
+  .vp-card .card-role { font-size: 12px; margin-top: 4px; }
+
+  /* Founder row */
+  .founder-row {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 0 12px;
+    margin-top: 16px;
+  }
+
+  .founder-row-card {
+    border: 2px solid;
+    border-radius: 6px;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: transform 0.12s, box-shadow 0.12s;
+    text-align: center;
+  }
+
+  .founder-row-card:hover { transform: translate(-2px,-2px); }
+  .founder-row-card.red  { border-color: var(--red);  background: var(--red-soft);  }
+  .founder-row-card.red:hover  { box-shadow: 4px 4px 0 var(--red); }
+  .founder-row-card.blue { border-color: var(--blue); background: var(--blue-soft); }
+  .founder-row-card.blue:hover { box-shadow: 4px 4px 0 var(--blue); }
+
+  .founder-row-card .card-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; }
+  .founder-row-card .card-role { font-size: 12px; margin-top: 4px; }
+
+  /* ── EDIT MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,23,20,0.6);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+
+  .modal {
+    background: var(--surface);
+    border: 2px solid var(--ink);
+    border-radius: 8px;
+    padding: 28px;
+    width: 380px;
+    max-width: 95vw;
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+
+  .modal h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+
+  .modal label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 14px;
+  }
+
+  .modal input, .modal select, .modal textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    padding: 9px 12px;
+    color: var(--ink);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .modal textarea { resize: vertical; min-height: 70px; }
+  .modal input:focus, .modal select:focus, .modal textarea:focus { border-color: var(--ink); }
+
+  .modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 22px;
+    justify-content: flex-end;
+  }
+
+  .btn {
+    padding: 9px 22px;
+    border-radius: 4px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 1.5px solid var(--ink);
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+
+  .btn:hover { transform: translate(-1px,-1px); box-shadow: 2px 2px 0 var(--ink); }
+  .btn-cancel { background: var(--bg); color: var(--text-muted); }
+  .btn-save   { background: var(--yellow); color: var(--ink); }
+
+  /* Principals edit modal extras */
+  .modal.principals-modal .p-name-preview {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div>
+    <h1>SUPERKIDS</h1>
+    <div class="founders">Built by Colm Dillane &amp; Sebastian Boon &nbsp;·&nbsp; New York / Europe</div>
+  </div>
+  <div class="tagline">"A studio for ideas that haven't learned their limits yet."</div>
+</header>
+
+<!-- PRINCIPALS SECTION -->
+<section class="principals">
+  <div class="principals-title">Core Principals</div>
+  <div class="principals-grid" id="principals-grid">
+    <!-- rendered by JS -->
+  </div>
+</section>
+
+<!-- ORG CHART -->
+<div class="board-wrap">
+  <div class="board-label">Organizational Structure</div>
+  <div class="board" id="board">
+    <div class="divider-label">◀ Project-Based &nbsp; | &nbsp; Functional ▶</div>
+    <div class="col-divider"></div>
+
+    <!-- CREATIVE -->
+    <div class="col col-creative">
+      <div class="col-header">Creative</div>
+      <div class="section-box red">
+        <div class="section-label">Creative Directors</div>
+        <div id="creative-directors"></div>
+      </div>
+      <div class="section-box yellow">
+        <div class="section-label">Freelance Network</div>
+        <div class="section-sublabel">Designers, Photographers, Editors</div>
+        <div id="creative-freelance"></div>
+      </div>
+    </div>
+
+    <!-- PRODUCTION / NETWORK -->
+    <div class="col col-network">
+      <div class="col-header">Production</div>
+      <div class="section-box green">
+        <div class="section-label">Production</div>
+        <div id="production-list"></div>
+      </div>
+      <div class="section-box yellow">
+        <div class="section-label">KidSuper In-House</div>
+        <div class="section-sublabel">NY Global HQ</div>
+        <div id="kidsuper-list"></div>
+      </div>
+    </div>
+
+    <!-- COMMS / CLIENT -->
+    <div class="col col-comms">
+      <div class="col-header">Client Relations</div>
+      <div class="section-box blue">
+        <div class="section-label">Brand Partners</div>
+        <div class="section-sublabel">EU &amp; US Clients</div>
+        <div id="clients-list"></div>
+      </div>
+      <div class="section-box blue" style="border-style:solid;">
+        <div class="section-label">PR &amp; Community</div>
+        <div id="pr-list"></div>
+      </div>
+    </div>
+
+    <!-- OPERATIONS -->
+    <div class="col col-ops">
+      <div class="col-header">Operations</div>
+      <div class="section-box purple">
+        <div class="section-label">Structure &amp; Management</div>
+        <div id="ops-management"></div>
+      </div>
+      <div class="section-box purple" style="border-style:solid; opacity:0.85;">
+        <div class="section-label">Legal &amp; Finance</div>
+        <div class="section-sublabel">On-demand / Retainer</div>
+        <div id="ops-legal"></div>
+      </div>
+      <div class="section-box purple">
+        <div class="section-label">Digital &amp; Archive</div>
+        <div id="ops-digital"></div>
+      </div>
+    </div>
+
+    <!-- VP ROW -->
+    <div class="vp-row">
+      <div class="vp-card" data-id="vp-production" onclick="openEdit(this)">
+        <div class="card-name">Matty Bauerschmidt</div>
+        <div class="card-role">Creative Producer</div>
+      </div>
+      <div class="vp-card" data-id="vp-ops" onclick="openEdit(this)">
+        <div class="card-name">Andre Marques</div>
+        <div class="card-role">Head of Structure &amp; Operations</div>
+      </div>
+    </div>
+
+    <!-- FOUNDERS ROW -->
+    <div class="founder-row">
+      <div class="founder-row-card red" data-id="founder-colm" onclick="openEdit(this)">
+        <div class="card-name">Colm Dillane</div>
+        <div class="card-role">Co-Founder · Creative Lead</div>
+      </div>
+      <div class="founder-row-card blue" data-id="founder-seb" onclick="openEdit(this)">
+        <div class="card-name">Sebastian Boon</div>
+        <div class="card-role">Co-Founder · Strategy &amp; EU</div>
+      </div>
+    </div>
+
+  </div><!-- /board -->
+</div><!-- /board-wrap -->
+
+<!-- EDIT MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="editModal">
+    <h3>Edit</h3>
+    <label>Name</label>
+    <input type="text" id="editName" placeholder="Full name">
+    <label>Role / Title</label>
+    <input type="text" id="editRole" placeholder="Job title">
+    <label>Note <span style="font-weight:400;text-transform:none;">(optional)</span></label>
+    <textarea id="editNote" placeholder="Brief note or context..."></textarea>
+    <label>Tags (comma-separated)</label>
+    <input type="text" id="editTags" placeholder="e.g. EU, US, Freelance">
+    <label>Status</label>
+    <select id="editStatus">
+      <option value="">— none —</option>
+      <option value="TBH">To Be Hired</option>
+      <option value="Considering">Considering</option>
+      <option value="Contract">Contract</option>
+      <option value="On Leave">On Leave</option>
+    </select>
+    <div class="modal-actions">
+      <button class="btn btn-cancel" onclick="closeEdit()">Cancel</button>
+      <button class="btn btn-save" onclick="saveEdit()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── PRINCIPALS DATA ────────────────────────────────────────────────────────────
+const principals = [
+  {
+    id: "pr-colm",
+    name: "Colm Dillane",
+    title: "Co-Founder · Creative Director",
+    role: "Founder",
+    type: "founder-a",
+    note: "KidSuper. Creative vision, art direction, brand. NY HQ as global base."
+  },
+  {
+    id: "pr-seb",
+    name: "Sebastian Boon",
+    title: "Co-Founder · Strategy & EU Operations",
+    role: "Founder",
+    type: "founder-b",
+    note: "EU bridge. Structure, partnerships, business development."
+  },
+  {
+    id: "pr-matty",
+    name: "Matty Bauerschmidt",
+    title: "Creative Producer",
+    role: "Core Team",
+    type: "core",
+    note: "Killer creative producer. Translates big ideas into executed projects."
+  },
+  {
+    id: "pr-andre",
+    name: "Andre Marques",
+    title: "Head of Structure & Management",
+    role: "Core Team",
+    type: "core",
+    note: "Makes sure Sebastian (and the agency) can stay focused on creative work."
+  },
+  {
+    id: "pr-max",
+    name: "Max Grapperhaus",
+    title: "Film & Production Partner",
+    role: "Network",
+    type: "core",
+    note: "Owner, Trip to the Moon Films. Key production collaborator."
+  },
+  {
+    id: "pr-malvin",
+    name: "Malvin Wix",
+    title: "Agency Structure Advisor",
+    role: "Network",
+    type: "core",
+    note: "Owner, d3pot-works. Expertise in building this exact company model."
+  },
+];
+
+// ── ORG DATA ──────────────────────────────────────────────────────────────────
+const data = {
+  "creative-directors": [
+    { id: "cd1", name: "Colm Dillane", role: "Creative Director", tags: ["KidSuper"], color: "red" },
+    { id: "cd2", name: "TBH", role: "Second Creative Director", tags: [], color: "red", status: "TBH" },
+  ],
+  "creative-freelance": [
+    { id: "cf1", name: "Freelance Designers", role: "On-demand · Global Network", tags: ["EU", "US"], color: "yellow" },
+    { id: "cf2", name: "Photographers", role: "Per-project", tags: [], color: "yellow" },
+    { id: "cf3", name: "Video Editors", role: "Per-project", tags: [], color: "yellow" },
+  ],
+  "production-list": [
+    { id: "p1", name: "Matty Bauerschmidt", role: "Creative Producer", tags: ["US"], color: "green" },
+    { id: "p2", name: "Max Grapperhaus", role: "Film Partner · Trip to the Moon", tags: ["EU"], color: "green" },
+    { id: "p3", name: "Project Manager", role: "TBH", tags: [], color: "green", status: "TBH" },
+  ],
+  "kidsuper-list": [
+    { id: "k1", name: "KidSuper Studio", role: "NY Global HQ · In-house resource", tags: ["NY"], color: "yellow" },
+    { id: "k2", name: "KidSuper Archive", role: "Portfolio & World-building base", tags: [], color: "yellow" },
+  ],
+  "clients-list": [
+    { id: "cl1", name: "Brand Clients (US)", role: "Commercial partnerships", tags: ["US"], color: "blue" },
+    { id: "cl2", name: "Brand Clients (EU)", role: "European accounts", tags: ["EU"], color: "blue" },
+  ],
+  "pr-list": [
+    { id: "pr1", name: "PR Consultant", role: "Reputation & Press", tags: [], color: "blue", status: "TBH" },
+    { id: "pr2", name: "Content / Podcast Lead", role: "YouTube, Podcast, Social", tags: [], color: "blue", status: "TBH" },
+  ],
+  "ops-management": [
+    { id: "om1", name: "Andre Marques", role: "Structure & Management", tags: ["EU"], color: "purple" },
+    { id: "om2", name: "Malvin Wix", role: "Advisor · Agency Structure", tags: [], color: "purple" },
+  ],
+  "ops-legal": [
+    { id: "ol1", name: "Legal Counsel", role: "Deal templates · IP · Contracts", tags: [], color: "purple", status: "TBH" },
+    { id: "ol2", name: "Finance / Accounting", role: "Small capital mgmt", tags: [], color: "purple", status: "TBH" },
+  ],
+  "ops-digital": [
+    { id: "od1", name: "Website Lead", role: "Archive site · Branding", tags: [], color: "purple", status: "TBH" },
+    { id: "od2", name: "Brand Designer", role: "Logo · Visual Identity", tags: [], color: "purple", status: "TBH" },
+  ],
+};
+
+// ── RENDER PRINCIPALS ─────────────────────────────────────────────────────────
+function renderPrincipals() {
+  const grid = document.getElementById('principals-grid');
+  grid.innerHTML = '';
+  principals.forEach(p => {
+    const div = document.createElement('div');
+    div.className = `principal-card ${p.type}`;
+    div.dataset.pid = p.id;
+    div.onclick = () => openPrincipalEdit(div);
+    div.innerHTML = `
+      <div class="role-tag">${p.role}</div>
+      <div class="p-name">${p.name}</div>
+      <div class="p-title">${p.title}</div>
+      ${p.note ? `<div class="p-note">${p.note}</div>` : ''}
+    `;
+    grid.appendChild(div);
+  });
+}
+
+// ── RENDER ORG ────────────────────────────────────────────────────────────────
+function renderSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.innerHTML = '';
+  (data[id] || []).forEach(person => {
+    const div = document.createElement('div');
+    div.className = `card ${person.color}`;
+    div.dataset.id = person.id;
+    div.dataset.section = id;
+    div.onclick = () => openEdit(div);
+    const tagsHtml = person.tags?.length ? `<div class="tags">${person.tags.map(t=>`<span class="tag tag-${t==='EU'?'blue':t==='US'?'red':t==='KidSuper'?'yellow':'green'}">${t}</span>`).join('')}</div>` : '';
+    const statusHtml = person.status ? `<span class="status-badge">${person.status}</span>` : '';
+    div.innerHTML = `<div class="card-name">${person.name}</div><div class="card-role">${person.role}</div>${tagsHtml}${statusHtml}`;
+    el.appendChild(div);
+  });
+}
+
+function renderAll() {
+  renderPrincipals();
+  Object.keys(data).forEach(renderSection);
+}
+
+renderAll();
+
+// ── EDIT MODAL ────────────────────────────────────────────────────────────────
+let currentCard = null;
+let currentPerson = null;
+let currentPrincipal = null;
+let editMode = 'org'; // 'org' | 'principal'
+
+function openEdit(cardEl) {
+  editMode = 'org';
+  currentCard = cardEl;
+  const id = cardEl.dataset.id;
+  const section = cardEl.dataset.section;
+  currentPerson = section ? data[section]?.find(p => p.id === id) : null;
+
+  document.getElementById('editName').value = cardEl.querySelector('.card-name').textContent;
+  document.getElementById('editRole').value = cardEl.querySelector('.card-role').textContent;
+  document.getElementById('editNote').value = '';
+  document.getElementById('editTags').value = currentPerson?.tags?.join(', ') || '';
+  document.getElementById('editStatus').value = currentPerson?.status || '';
+  document.getElementById('modalOverlay').classList.add('active');
+}
+
+function openPrincipalEdit(cardEl) {
+  editMode = 'principal';
+  currentCard = cardEl;
+  const pid = cardEl.dataset.pid;
+  currentPrincipal = principals.find(p => p.id === pid);
+
+  document.getElementById('editName').value = currentPrincipal.name;
+  document.getElementById('editRole').value = currentPrincipal.title;
+  document.getElementById('editNote').value = currentPrincipal.note || '';
+  document.getElementById('editTags').value = currentPrincipal.role || '';
+  document.getElementById('editStatus').value = '';
+  document.getElementById('modalOverlay').classList.add('active');
+}
+
+function closeEdit() {
+  document.getElementById('modalOverlay').classList.remove('active');
+  currentCard = currentPerson = currentPrincipal = null;
+}
+
+function saveEdit() {
+  const name = document.getElementById('editName').value.trim();
+  const role = document.getElementById('editRole').value.trim();
+  const note = document.getElementById('editNote').value.trim();
+  const tagsRaw = document.getElementById('editTags').value.trim();
+  const status = document.getElementById('editStatus').value;
+  const tags = tagsRaw ? tagsRaw.split(',').map(t=>t.trim()).filter(Boolean) : [];
+
+  if (editMode === 'principal' && currentPrincipal) {
+    currentPrincipal.name = name;
+    currentPrincipal.title = role;
+    currentPrincipal.note = note;
+    currentPrincipal.role = tagsRaw;
+    renderPrincipals();
+  } else if (currentPerson) {
+    currentPerson.name = name;
+    currentPerson.role = role;
+    currentPerson.tags = tags;
+    if (status) currentPerson.status = status; else delete currentPerson.status;
+    renderSection(currentCard.dataset.section);
+  } else if (currentCard) {
+    currentCard.querySelector('.card-name').textContent = name;
+    currentCard.querySelector('.card-role').textContent = role;
+  }
+  closeEdit();
+}
+
+document.getElementById('modalOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeEdit();
+});
+</script>
+</body>
+</html>
