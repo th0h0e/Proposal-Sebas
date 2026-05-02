@@ -670,6 +670,19 @@ body {
   opacity: 1;
 }
 
+/* ── Duplicate button ── */
+.btn-duplicate {
+  background: transparent;
+  color: var(--blue);
+  border: 1.5px solid var(--blue);
+  font-weight: 500;
+}
+
+.btn-duplicate:hover {
+  background: var(--blue);
+  color: var(--bg);
+}
+
 /* ── Dark-mode specific refinements ── */
 body.dark .org-header {
   border-bottom-color: #3a3632;

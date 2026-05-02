@@ -156,6 +156,15 @@ async function handleDelete(memberId: string) {
   closeModal()
 }
 
+async function handleDuplicate(memberId: string) {
+  const res = await fetch(`/api/members/${memberId}/duplicate`, {
+    method: 'POST',
+  })
+  if (res.ok)
+    await fetchOrg()
+  closeModal()
+}
+
 onMounted(() => {
   const saved = localStorage.getItem('superkids-dark')
   if (saved === '1')
@@ -203,6 +212,7 @@ onMounted(() => {
       @close="closeModal"
       @save="handleSave"
       @delete="handleDelete"
+      @duplicate="handleDuplicate"
     />
   </div>
 </template>

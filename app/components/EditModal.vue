@@ -29,6 +29,7 @@ const emit = defineEmits<{
   close: []
   save: [data: { name: string, role: string, note: string, tags: string, status: string }]
   delete: [memberId: string]
+  duplicate: [memberId: string]
 }>()
 
 const name = ref('')
@@ -42,6 +43,8 @@ const title = computed(() =>
 )
 
 const showDelete = computed(() => props.mode === 'member' && props.member?.id)
+
+const showDuplicate = computed(() => props.mode === 'member' && props.member?.id)
 
 onMounted(() => {
   if (props.mode === 'principal' && props.principal) {
@@ -144,6 +147,9 @@ function handleDelete() {
         <template v-else>
           <button v-if="showDelete" class="btn btn-danger" @click="handleDelete">
             Delete
+          </button>
+          <button v-if="showDuplicate" class="btn btn-duplicate" @click="emit('duplicate', member!.id)">
+            Duplicate
           </button>
           <div style="flex: 1" />
           <button class="btn btn-cancel" @click="emit('close')">
