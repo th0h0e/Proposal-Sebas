@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { VueDraggable } from 'vue-draggable-plus'
 import MemberCard from './MemberCard.vue'
 
 interface Member {
@@ -30,6 +31,8 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   editMember: [member: Member, sectionKey: string]
+  reorder: []
+  updateMembers: [sectionKey: string, members: Member[]]
 }>()
 
 const colorMap: Record<string, string> = {
@@ -47,6 +50,10 @@ const colorMap: Record<string, string> = {
 function sectionColor(key: string): string {
   const firstMember = props.sections[key]?.members?.[0]
   return firstMember?.color || colorMap[key] || 'yellow'
+}
+
+function onDragEnd() {
+  emit('reorder')
 }
 </script>
 
@@ -72,12 +79,22 @@ function sectionColor(key: string): string {
         {{ sections[sectionKey].sublabel }}
       </div>
 
-      <MemberCard
-        v-for="member in sections[sectionKey]?.members"
-        :key="member.id"
-        :member="member"
-        @click="emit('editMember', member, sectionKey)"
-      />
+      <VueDraggable
+        :model-value="sections[sectionKey]?.members || []"
+        group="org-members"
+        :animation="150"
+        ghost-class="drag-ghost"
+        drag-class="drag-dragging"
+        @update:model-value="(val: Member[]) => emit('updateMembers', sectionKey, val)"
+        @end="onDragEnd"
+      >
+        <MemberCard
+          v-for="member in sections[sectionKey]?.members"
+          :key="member.id"
+          :member="member"
+          @click="emit('editMember', member, sectionKey)"
+        />
+      </VueDraggable>
     </div>
   </div>
 </template>

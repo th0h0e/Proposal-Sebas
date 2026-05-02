@@ -165,6 +165,30 @@ async function handleDuplicate(memberId: string) {
   closeModal()
 }
 
+async function handleReorder() {
+  if (!orgData.value)
+    return
+
+  // Build reorder payload from current reactive state
+  const payload: Record<string, { members: Member[] }> = {}
+  for (const [key, section] of Object.entries(orgData.value.sections)) {
+    payload[key] = { members: section.members }
+  }
+  const res = await fetch('/api/org/reorder', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ sections: payload }),
+  })
+  if (!res.ok)
+    console.error('Failed to persist reorder')
+}
+
+function handleUpdateMembers(sectionKey: string, members: Member[]) {
+  if (!orgData.value)
+    return
+  orgData.value.sections[sectionKey].members = members
+}
+
 onMounted(() => {
   const saved = localStorage.getItem('superkids-dark')
   if (saved === '1')
@@ -200,6 +224,8 @@ onMounted(() => {
           :column="col"
           :sections="orgData.sections"
           @edit-member="openMemberEdit"
+          @reorder="handleReorder"
+          @update-members="handleUpdateMembers"
         />
       </div>
     </div>
