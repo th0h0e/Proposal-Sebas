@@ -123,6 +123,55 @@ const defaultSections: OrgData['sections'] = {
       { id: 'pr2', name: 'Content / Podcast Lead', role: 'YouTube, Podcast, Social', tags: [], color: 'blue', status: 'TBH' },
     ],
   },
+  'pipeline-inbound': {
+    label: 'Inbound Leads',
+    sublabel: 'Incoming requests & inquiries',
+    members: [
+      { id: 'pi1', name: 'Direct Inquiries', role: 'Website · DMs · Referrals', tags: ['US', 'EU'], color: 'orange' },
+      { id: 'pi2', name: 'Agent / Rep Leads', role: 'Talent reps · Middlemen', tags: [], color: 'orange' },
+      { id: 'pi3', name: 'Repeat Clients', role: 'Returning brand partners', tags: ['KidSuper'], color: 'orange' },
+    ],
+  },
+  'pipeline-active': {
+    label: 'Active Pitches',
+    sublabel: 'Proposals & negotiations',
+    members: [
+      { id: 'pa1', name: 'Pitch Lead', role: 'Creative pitch development', tags: [], color: 'orange', status: 'TBH' },
+      { id: 'pa2', name: 'Budget & Scope', role: 'Scoping · Pricing · Timeline', tags: [], color: 'orange', status: 'TBH' },
+    ],
+  },
+  'pipeline-won': {
+    label: 'Won Projects',
+    sublabel: 'Signed · In production',
+    members: [
+      { id: 'pw1', name: 'Project Tracker', role: 'Active project oversight', tags: [], color: 'orange', status: 'TBH' },
+    ],
+  },
+  'pipeline-inbound': {
+    label: 'Inbound Requests',
+    sublabel: 'Incoming leads & inquiries',
+    members: [
+      { id: 'pi1', name: 'Direct Referrals', role: 'Warm leads from network', tags: ['EU', 'US'], color: 'orange' },
+      { id: 'pi2', name: 'Inbound via KidSuper', role: 'Brand-driven inquiries', tags: ['NY'], color: 'orange' },
+      { id: 'pi3', name: 'Cold Outreach', role: 'Proactive pitching', tags: [], color: 'orange', status: 'TBH' },
+    ],
+  },
+  'pipeline-qualified': {
+    label: 'Qualified Leads',
+    sublabel: 'Vetted & scoped',
+    members: [
+      { id: 'pq1', name: 'Pitch Deck Lead', role: 'Create & send proposals', tags: [], color: 'orange', status: 'TBH' },
+      { id: 'pq2', name: 'Scope & Budget Review', role: 'Define deliverables & timeline', tags: [], color: 'orange' },
+    ],
+  },
+  'pipeline-active': {
+    label: 'Active Pitches',
+    sublabel: 'Proposals sent · Negotiating',
+    members: [
+      { id: 'pa1', name: 'Pitch Tracking', role: 'Follow-ups & status updates', tags: [], color: 'orange' },
+      { id: 'pa2', name: 'Deal Closing', role: 'Contract & onboarding', tags: [], color: 'orange', status: 'TBH' },
+    ],
+  },
   'ops-management': {
     label: 'Structure & Management',
     members: [
@@ -165,6 +214,12 @@ const defaultColumns: OrgData['columns'] = [
     header: 'Client Relations',
     colorClass: 'col-comms',
     sections: ['clients-list', 'pr-list'],
+  },
+  {
+    key: 'pipeline',
+    header: 'Client Pipeline',
+    colorClass: 'col-pipeline',
+    sections: ['pipeline-inbound', 'pipeline-qualified', 'pipeline-active'],
   },
   {
     key: 'ops',

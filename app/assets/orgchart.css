@@ -21,6 +21,8 @@
   --green-soft: rgba(45, 184, 122, 0.1);
   --purple: #8b2de8;
   --purple-soft: rgba(139, 45, 232, 0.1);
+  --orange: #e8782d;
+  --orange-soft: rgba(232, 120, 45, 0.1);
 
   --header-bg: var(--yellow);
   --modal-overlay: rgba(26, 23, 20, 0.6);
@@ -53,6 +55,8 @@ body.dark {
   --green-soft: rgba(77, 216, 154, 0.1);
   --purple: #a855f7;
   --purple-soft: rgba(168, 85, 247, 0.1);
+  --orange: #f09658;
+  --orange-soft: rgba(240, 150, 88, 0.1);
 
   --header-bg: #2a2520;
   --modal-overlay: rgba(0, 0, 0, 0.75);
@@ -279,6 +283,9 @@ body {
 .col-ops .col-header {
   color: var(--purple);
 }
+.col-pipeline .col-header {
+  color: var(--orange);
+}
 
 /* Section box */
 .section-box {
@@ -310,6 +317,10 @@ body {
   border-color: var(--yellow);
   background: var(--yellow-soft);
 }
+.section-box.orange {
+  border-color: var(--orange);
+  background: var(--orange-soft);
+}
 
 .section-label {
   font-family: 'Bebas Neue', sans-serif;
@@ -334,6 +345,9 @@ body {
 }
 .section-box.yellow .section-label {
   color: var(--yellow-label);
+}
+.section-box.orange .section-label {
+  color: var(--orange);
 }
 
 .section-sublabel {
@@ -377,6 +391,9 @@ body {
 }
 .card.yellow {
   border-left: 3px solid var(--yellow);
+}
+.card.orange {
+  border-left: 3px solid var(--orange);
 }
 
 .card-name {
@@ -433,6 +450,11 @@ body {
   background: var(--purple-soft);
   color: var(--purple);
   border: 1px solid var(--purple);
+}
+.tag-orange {
+  background: var(--orange-soft);
+  color: var(--orange);
+  border: 1px solid var(--orange);
 }
 
 .status-badge {

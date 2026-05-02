@@ -45,6 +45,9 @@ const colorMap: Record<string, string> = {
   'ops-management': 'purple',
   'ops-legal': 'purple',
   'ops-digital': 'purple',
+  'pipeline-inbound': 'orange',
+  'pipeline-qualified': 'orange',
+  'pipeline-active': 'orange',
 }
 
 function sectionColor(key: string): string {
