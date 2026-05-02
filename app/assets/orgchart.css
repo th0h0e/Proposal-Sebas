@@ -468,7 +468,7 @@ body {
   border: 2px solid var(--ink);
   border-radius: 8px;
   padding: 28px;
-  width: 420px;
+  width: 520px;
   max-width: 95vw;
   box-shadow: 6px 6px 0 var(--ink);
 }
