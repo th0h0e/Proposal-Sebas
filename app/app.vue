@@ -2,8 +2,10 @@
 import { onMounted, ref } from 'vue'
 import EditModal from './components/EditModal.vue'
 import OrgHeader from './components/OrgHeader.vue'
+import PipelineSection from './components/PipelineSection.vue'
 import PrincipalsSection from './components/PrincipalsSection.vue'
 import SectionColumn from './components/SectionColumn.vue'
+import VersionBar from './components/VersionBar.vue'
 
 interface Principal {
   id: string
@@ -36,10 +38,17 @@ interface Column {
   sections: string[]
 }
 
+interface PipelineConfig {
+  header: string
+  subtitle: string
+  steps: string[]
+}
+
 interface OrgData {
   principals: Principal[]
   sections: Record<string, Section>
   columns: Column[]
+  pipeline: PipelineConfig
 }
 
 const orgData = ref<OrgData | null>(null)
@@ -189,6 +198,10 @@ function handleUpdateMembers(sectionKey: string, members: Member[]) {
   orgData.value.sections[sectionKey].members = members
 }
 
+async function handleVersionRestore(_name: string) {
+  await fetchOrg()
+}
+
 onMounted(() => {
   const saved = localStorage.getItem('superkids-dark')
   if (saved === '1')
@@ -203,6 +216,7 @@ onMounted(() => {
   </div>
   <div v-else-if="orgData">
     <OrgHeader :dark="darkMode" @toggle-dark="toggleDark" />
+    <VersionBar @restore="handleVersionRestore" />
     <PrincipalsSection
       :principals="orgData.principals"
       @edit="openPrincipalEdit"
@@ -229,6 +243,14 @@ onMounted(() => {
         />
       </div>
     </div>
+
+    <PipelineSection
+      :pipeline="orgData.pipeline"
+      :sections="orgData.sections"
+      @edit-member="openMemberEdit"
+      @reorder="handleReorder"
+      @update-members="handleUpdateMembers"
+    />
 
     <EditModal
       v-if="showModal"

@@ -15,6 +15,7 @@ export default defineHandler(async (event) => {
     principals: body.principals,
     sections: body.sections,
     columns: body.columns || existing.columns,
+    pipeline: body.pipeline || existing.pipeline,
   }
 
   await saveOrgData(data)

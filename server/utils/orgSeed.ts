@@ -18,10 +18,24 @@ interface Member {
   status?: string
 }
 
+interface PipelineConfig {
+  header: string
+  subtitle: string
+  steps: string[]
+}
+
 interface OrgData {
   principals: Principal[]
   sections: Record<string, { label: string, sublabel?: string, members: Member[] }>
   columns: { key: string, header: string, colorClass: string, sections: string[] }[]
+  pipeline: PipelineConfig
+}
+
+interface SavedVersion {
+  name: string
+  label: string
+  createdAt: string
+  data: OrgData
 }
 
 const defaultPrincipals: Principal[] = [
@@ -196,6 +210,12 @@ const defaultSections: OrgData['sections'] = {
   },
 }
 
+const defaultPipeline: OrgData['pipeline'] = {
+  header: 'Client Pipeline',
+  subtitle: 'Steps & procedures for acquiring clients',
+  steps: ['pipeline-inbound', 'pipeline-qualified', 'pipeline-active'],
+}
+
 const defaultColumns: OrgData['columns'] = [
   {
     key: 'creative',
@@ -216,12 +236,6 @@ const defaultColumns: OrgData['columns'] = [
     sections: ['clients-list', 'pr-list'],
   },
   {
-    key: 'pipeline',
-    header: 'Client Pipeline',
-    colorClass: 'col-pipeline',
-    sections: ['pipeline-inbound', 'pipeline-qualified', 'pipeline-active'],
-  },
-  {
     key: 'ops',
     header: 'Operations',
     colorClass: 'col-ops',
@@ -233,9 +247,10 @@ const defaultOrgData: OrgData = {
   principals: defaultPrincipals,
   sections: defaultSections,
   columns: defaultColumns,
+  pipeline: defaultPipeline,
 }
 
-export type { Member, OrgData, Principal }
+export type { Member, OrgData, PipelineConfig, Principal, SavedVersion }
 export { defaultOrgData }
 
 export async function ensureSeeded() {
@@ -249,10 +264,67 @@ export async function ensureSeeded() {
 export async function getOrgData(): Promise<OrgData> {
   const storage = useStorage('org')
   await ensureSeeded()
-  return (await storage.getItem<OrgData>('chart'))!
+  const data = (await storage.getItem<OrgData>('chart'))!
+
+  if (!data.pipeline) {
+    const pipelineCol = data.columns.find(c => c.key === 'pipeline')
+    if (pipelineCol) {
+      data.columns = data.columns.filter(c => c.key !== 'pipeline')
+      data.pipeline = {
+        header: pipelineCol.header,
+        subtitle: 'Steps & procedures for acquiring clients',
+        steps: pipelineCol.sections,
+      }
+    }
+    else {
+      data.pipeline = defaultPipeline
+    }
+    await storage.setItem('chart', data)
+  }
+
+  return data
 }
 
 export async function saveOrgData(data: OrgData): Promise<void> {
   const storage = useStorage('org')
   await storage.setItem('chart', data)
+}
+
+export async function getVersions(): Promise<SavedVersion[]> {
+  const storage = useStorage('org')
+  const keys = await storage.getKeys('versions')
+  const versions: SavedVersion[] = []
+  for (const key of keys) {
+    const version = await storage.getItem<SavedVersion>(key)
+    if (version)
+      versions.push(version)
+  }
+  return versions.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+}
+
+export async function saveVersion(name: string, label: string): Promise<SavedVersion> {
+  const storage = useStorage('org')
+  const data = await getOrgData()
+  const version: SavedVersion = {
+    name,
+    label,
+    createdAt: new Date().toISOString(),
+    data,
+  }
+  await storage.setItem(`versions:${name}`, version)
+  return version
+}
+
+export async function deleteVersion(name: string): Promise<void> {
+  const storage = useStorage('org')
+  await storage.removeItem(`versions:${name}`)
+}
+
+export async function restoreVersion(name: string): Promise<OrgData> {
+  const storage = useStorage('org')
+  const version = await storage.getItem<SavedVersion>(`versions:${name}`)
+  if (!version)
+    throw new Error(`Version "${name}" not found`)
+  await storage.setItem('chart', version.data)
+  return version.data
 }
