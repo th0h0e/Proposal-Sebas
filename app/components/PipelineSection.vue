@@ -1,27 +1,7 @@
 <script setup lang="ts">
+import type { Member, PipelineConfig, Section } from '../types.ts'
 import { VueDraggable } from 'vue-draggable-plus'
 import MemberCard from './MemberCard.vue'
-
-interface Member {
-  id: string
-  name: string
-  role: string
-  tags: string[]
-  color: string
-  status?: string
-}
-
-interface PipelineConfig {
-  header: string
-  subtitle: string
-  steps: string[]
-}
-
-interface Section {
-  label: string
-  sublabel?: string
-  members: Member[]
-}
 
 defineProps<{
   pipeline: PipelineConfig

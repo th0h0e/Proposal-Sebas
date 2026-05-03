@@ -1,12 +1,5 @@
 <script setup lang="ts">
-interface Principal {
-  id: string
-  name: string
-  title: string
-  role: string
-  type: string
-  note: string
-}
+import type { Principal } from '../types.ts'
 
 defineProps<{
   principals: Principal[]

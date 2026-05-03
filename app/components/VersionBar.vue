@@ -122,7 +122,7 @@ onBeforeUnmount(() => {
         <button class="btn btn-cancel btn-sm" @click="toggleDropdown">
           Saved Versions ▾
         </button>
-        <div v-if="dropdownOpen" class="version-dropdown open">
+        <div v-if="dropdownOpen" class="version-dropdown">
           <div
             v-for="v in versions"
             :key="v.name"

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Member, OrgData, Principal } from './types.ts'
 import { onMounted, ref } from 'vue'
 import EditModal from './components/EditModal.vue'
 import OrgHeader from './components/OrgHeader.vue'
@@ -6,50 +7,6 @@ import PipelineSection from './components/PipelineSection.vue'
 import PrincipalsSection from './components/PrincipalsSection.vue'
 import SectionColumn from './components/SectionColumn.vue'
 import VersionBar from './components/VersionBar.vue'
-
-interface Principal {
-  id: string
-  name: string
-  title: string
-  role: string
-  type: string
-  note: string
-}
-
-interface Member {
-  id: string
-  name: string
-  role: string
-  tags: string[]
-  color: string
-  status?: string
-}
-
-interface Section {
-  label: string
-  sublabel?: string
-  members: Member[]
-}
-
-interface Column {
-  key: string
-  header: string
-  colorClass: string
-  sections: string[]
-}
-
-interface PipelineConfig {
-  header: string
-  subtitle: string
-  steps: string[]
-}
-
-interface OrgData {
-  principals: Principal[]
-  sections: Record<string, Section>
-  columns: Column[]
-  pipeline: PipelineConfig
-}
 
 const orgData = ref<OrgData | null>(null)
 const loading = ref(true)

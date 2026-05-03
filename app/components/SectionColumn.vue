@@ -1,28 +1,7 @@
 <script setup lang="ts">
+import type { Column, Member, Section } from '../types.ts'
 import { VueDraggable } from 'vue-draggable-plus'
 import MemberCard from './MemberCard.vue'
-
-interface Member {
-  id: string
-  name: string
-  role: string
-  tags: string[]
-  color: string
-  status?: string
-}
-
-interface Section {
-  label: string
-  sublabel?: string
-  members: Member[]
-}
-
-interface Column {
-  key: string
-  header: string
-  colorClass: string
-  sections: string[]
-}
 
 const props = defineProps<{
   column: Column

@@ -1,23 +1,6 @@
 <script setup lang="ts">
+import type { Member, Principal } from '../types.ts'
 import { computed, onMounted, ref } from 'vue'
-
-interface Principal {
-  id: string
-  name: string
-  title: string
-  role: string
-  type: string
-  note: string
-}
-
-interface Member {
-  id: string
-  name: string
-  role: string
-  tags: string[]
-  color: string
-  status?: string
-}
 
 const props = defineProps<{
   mode: 'principal' | 'member'
@@ -87,10 +70,6 @@ function confirmDeleteAction() {
 function cancelDelete() {
   confirmDelete.value = false
 }
-
-function handleDelete() {
-  requestDelete()
-}
 </script>
 
 <template>
@@ -145,7 +124,7 @@ function handleDelete() {
           </button>
         </template>
         <template v-else>
-          <button v-if="showDelete" class="btn btn-danger" @click="handleDelete">
+          <button v-if="showDelete" class="btn btn-danger" @click="requestDelete">
             Delete
           </button>
           <button v-if="showDuplicate" class="btn btn-duplicate" @click="emit('duplicate', member!.id)">

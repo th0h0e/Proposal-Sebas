@@ -1,12 +1,5 @@
 <script setup lang="ts">
-interface Member {
-  id: string
-  name: string
-  role: string
-  tags: string[]
-  color: string
-  status?: string
-}
+import type { Member } from '../types.ts'
 
 defineProps<{
   member: Member
