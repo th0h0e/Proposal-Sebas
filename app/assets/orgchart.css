@@ -801,6 +801,11 @@ body.dark .principal-card.founder-b:hover {
 .pipeline-header {
   text-align: center;
   margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .pipeline-title {
@@ -840,6 +845,48 @@ body.dark .principal-card.founder-b:hover {
   text-transform: uppercase;
   text-align: center;
   margin-bottom: 8px;
+}
+
+.pipeline-manage-btn {
+  font-size: 10px;
+}
+
+.pipeline-modal-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.pipeline-modal-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+}
+
+.pipeline-modal-step-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  color: var(--orange);
+  width: 28px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.pipeline-modal-step-label {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.pipeline-modal-step-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
 }
 
 .pipeline-arrow {

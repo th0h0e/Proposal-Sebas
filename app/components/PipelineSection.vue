@@ -12,6 +12,7 @@ const emit = defineEmits<{
   editMember: [member: Member, sectionKey: string]
   reorder: []
   updateMembers: [sectionKey: string, members: Member[]]
+  manage: []
 }>()
 
 function onDragEnd() {
@@ -28,6 +29,9 @@ function onDragEnd() {
       <div class="pipeline-subtitle">
         {{ pipeline.subtitle }}
       </div>
+      <button class="btn btn-cancel btn-xs pipeline-manage-btn" @click="emit('manage')">
+        Manage Steps
+      </button>
     </div>
 
     <div class="pipeline">

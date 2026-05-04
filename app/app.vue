@@ -3,6 +3,7 @@ import type { Member, OrgData, Principal } from './types.ts'
 import { onMounted, ref } from 'vue'
 import EditModal from './components/EditModal.vue'
 import OrgHeader from './components/OrgHeader.vue'
+import PipelineModal from './components/PipelineModal.vue'
 import PipelineSection from './components/PipelineSection.vue'
 import PrincipalsSection from './components/PrincipalsSection.vue'
 import SectionColumn from './components/SectionColumn.vue'
@@ -30,6 +31,7 @@ const editMode = ref<'principal' | 'member'>('member')
 const editingPrincipal = ref<Principal | null>(null)
 const editingMember = ref<Member | null>(null)
 const editingSectionKey = ref<string>('')
+const showPipelineModal = ref(false)
 
 async function fetchOrg() {
   try {
@@ -155,6 +157,22 @@ function handleUpdateMembers(sectionKey: string, members: Member[]) {
   orgData.value.sections[sectionKey].members = members
 }
 
+async function handleAddPipelineStep(data: { label: string, sublabel?: string, insertAfter?: number }) {
+  const res = await fetch('/api/pipeline/steps', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  })
+  if (res.ok)
+    await fetchOrg()
+}
+
+async function handleDeletePipelineStep(index: number) {
+  const res = await fetch(`/api/pipeline/steps/${index}`, { method: 'DELETE' })
+  if (res.ok)
+    await fetchOrg()
+}
+
 async function handleVersionRestore(_name: string) {
   await fetchOrg()
 }
@@ -207,6 +225,7 @@ onMounted(() => {
       @edit-member="openMemberEdit"
       @reorder="handleReorder"
       @update-members="handleUpdateMembers"
+      @manage="showPipelineModal = true"
     />
 
     <EditModal
@@ -218,6 +237,14 @@ onMounted(() => {
       @save="handleSave"
       @delete="handleDelete"
       @duplicate="handleDuplicate"
+    />
+
+    <PipelineModal
+      v-if="showPipelineModal"
+      :step-count="orgData.pipeline.steps.length"
+      @close="showPipelineModal = false"
+      @add-step="handleAddPipelineStep"
+      @delete-step="handleDeletePipelineStep"
     />
   </div>
 </template>
