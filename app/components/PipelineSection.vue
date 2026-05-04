@@ -39,7 +39,6 @@ function onDragEnd() {
         <div v-if="index > 0" class="pipeline-arrow">
           <span class="arrow-line" />
           <span class="arrow-head">&#x25B6;</span>
-          <span class="arrow-line" />
         </div>
         <div class="pipeline-step">
           <div class="pipeline-step-number">

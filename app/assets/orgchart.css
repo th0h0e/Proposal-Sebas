@@ -826,15 +826,16 @@ body.dark .principal-card.founder-b:hover {
 .pipeline {
   display: flex;
   gap: 0;
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  max-width: 520px;
+  margin: 0 auto;
 }
 
 .pipeline-step {
   flex: 1;
-  min-width: 220px;
-  max-width: 340px;
+  min-width: 0;
 }
 
 .pipeline-step-number {
@@ -892,16 +893,16 @@ body.dark .principal-card.founder-b:hover {
 .pipeline-arrow {
   display: flex;
   align-items: center;
-  padding-top: 36px;
-  gap: 0;
-  flex-shrink: 0;
-  width: 40px;
   justify-content: center;
+  flex-shrink: 0;
+  height: 32px;
+  flex-direction: column;
+  gap: 0;
 }
 
 .arrow-line {
-  flex: 1;
-  height: 2px;
+  width: 2px;
+  height: 12px;
   background: var(--orange);
   opacity: 0.4;
 }
@@ -911,6 +912,7 @@ body.dark .principal-card.founder-b:hover {
   font-size: 10px;
   line-height: 1;
   opacity: 0.6;
+  transform: rotate(90deg);
 }
 
 body.dark .pipeline-wrap {
